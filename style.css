@@ -751,6 +751,16 @@ section .section-intro {
   filter: brightness(0.8);
 }
 
+/* Görsel için özel stil - Overlay olmadan orijinal renkleri gösterir */
+.no-overlay {
+  filter: none !important;
+}
+
+/* Üst görsel için overlay kaldırma */
+.top-image-container .process-flow-overlay {
+  display: none;
+}
+
 .process-flow-overlay {
   position: absolute;
   top: 0;
@@ -965,8 +975,6 @@ section .section-intro {
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
 }
-
-
 
 /* WHATSAPP BUTTON */
 .whatsapp-button {
@@ -1303,8 +1311,6 @@ footer {
     font-size: 1.4rem;
   }
   
-
-  
   .whatsapp-contact-container {
     padding: var(--spacing-md);
   }
@@ -1327,8 +1333,6 @@ footer {
     margin-right: var(--spacing-sm);
   }
 }
-
-
 
 .address-link {
   display: block;
