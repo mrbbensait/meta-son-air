@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Elementleri seçelim
   const sections = document.querySelectorAll('section');
   const processSteps = document.querySelectorAll('.process-step');
+  const processRows = document.querySelectorAll('.process-row');
+  const processArrows = document.querySelectorAll('.arrow-down');
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
   const navMenu = document.querySelector('.nav-menu');
   const fixedNav = document.querySelector('.fixed-nav');
@@ -15,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroSection = document.querySelector('#hero');
   const formControls = document.querySelectorAll('.form-control');
   const images = document.querySelectorAll('img');
+  const counters = document.querySelectorAll('.counter');
+  const statsSection = document.querySelector('#stats-counter');
+  let counterStarted = false;
 
   // Sayfa yükleme performansını takip etmek için
   if (window.performance && performance.timing) {
@@ -62,6 +67,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Sayaç animasyonu fonksiyonu
+  function startCounters() {
+    if (counterStarted) return;
+    
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const speed = 200; // Animasyon hızı (düşük değer daha hızlı)
+      const increment = target / speed;
+      let count = 0;
+      
+      const updateCount = () => {
+        if (count < target) {
+          count += increment;
+          counter.innerText = Math.ceil(count);
+          setTimeout(updateCount, 1);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      
+      updateCount();
+    });
+    
+    counterStarted = true;
+  }
+
   // Sayfa kaydırıldığında gerçekleşecek işlemler
   window.addEventListener('scroll', () => {
     // Yüksek performanslı kaydırma olayı için requestAnimationFrame kullan
@@ -82,6 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Bölümlerin görünür hale gelme animasyonu
       checkSectionsVisibility();
+      
+      // Process Flow elemanlarının görünürlüğünü kontrol et
+      checkProcessFlowVisibility();
+      
+      // Sayaçları kontrol et
+      if (statsSection) {
+        const rect = statsSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+          startCounters();
+        }
+      }
     });
   });
 
@@ -116,6 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!section.classList.contains('is-visible')) {
           section.classList.add('is-visible');
         }
+      }
+    });
+  }
+
+  // Process flow elemanlarının görünürlüğünü kontrol et
+  function checkProcessFlowVisibility() {
+    // Process row container'ları kontrol edelim
+    const processRowContainers = document.querySelectorAll('.process-row-container');
+    processRowContainers.forEach(container => {
+      const rect = container.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        const row = container.querySelector('.process-row');
+        const arrow = container.querySelector('.arrow-down');
+        if (row) row.classList.add('is-visible');
+        if (arrow) arrow.classList.add('is-visible');
       }
     });
   }
@@ -294,4 +351,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // İlk yüklemede görünürlüğü kontrol et
+  setTimeout(() => {
+    checkSectionsVisibility();
+    checkProcessFlowVisibility();
+  }, 100);
 }); 
