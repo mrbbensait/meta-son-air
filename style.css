@@ -1401,6 +1401,19 @@ footer {
   .process-flow-img {
     display: none;
   }
+  
+  #hero {
+    min-height: 500px;
+    height: auto;
+    padding-top: 80px;
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 50px;
+  }
+  
+  .hero-content {
+    margin-top: 60px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -1417,8 +1430,27 @@ footer {
   }
   
   #hero {
-    min-height: 400px;
-    padding-top: 60px;
+    min-height: auto;
+    height: auto;
+    padding-top: 160px;
+    padding-bottom: 80px;
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  #hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+  
+  #hero p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+  
+  .hero-content {
+    margin-top: 0;
+    padding: var(--spacing-md);
   }
   
   .cta-button {
