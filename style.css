@@ -412,6 +412,8 @@ button {
   text-align: center;
   overflow: hidden;
   background-color: var(--light-color);
+  padding-top: 80px;
+  margin-bottom: 20px;
 }
 
 .hero-background {
@@ -471,6 +473,7 @@ button {
   box-shadow: var(--shadow);
   animation: fadeIn 1s ease-out 1s forwards;
   opacity: 0;
+  margin-bottom: 30px;
 }
 
 .cta-button:hover {
@@ -540,6 +543,7 @@ section .section-intro {
   padding: var(--spacing-md) 0;
   position: relative;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .stats-counter::before {
@@ -1414,11 +1418,13 @@ footer {
   
   #hero {
     min-height: 400px;
+    padding-top: 60px;
   }
   
   .cta-button {
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
+    margin-bottom: 40px;
   }
   
   .process-step h3 {
@@ -1484,6 +1490,14 @@ footer {
   
   .counter-item i {
     font-size: 1.8rem;
+  }
+  
+  .process-number {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    line-height: 32px;
+    margin-right: 10px;
   }
 }
 
@@ -1623,6 +1637,9 @@ footer {
     font-weight: bold;
     font-size: 1.2rem;
     margin-right: 15px;
+    min-width: 40px;
+    text-align: center;
+    line-height: 40px;
 }
 
 .process-text h3 {
