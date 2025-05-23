@@ -360,12 +360,9 @@ button {
 }
 
 .nav-logo {
-  font-size: 2rem;
   font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
   color: var(--primary-color);
-  margin-bottom: var(--spacing-md);
-  display: block;
 }
 
 .nav-menu {
@@ -471,8 +468,7 @@ button {
 }
 
 /* Placeholder'ı gizle (ana görsel yüklendiğinde) */
-.hero-main-image.loaded ~ .hero-placeholder,
-.hero-background-container:has(.hero-main-image.loaded) .hero-placeholder {
+.hero-main-image.loaded ~ .hero-placeholder {
   opacity: 0;
 }
 
@@ -1892,14 +1888,14 @@ footer {
 }
 
 .service-content p {
-  font-size: var(--font-size-base);
-  margin-bottom: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 10;
+  display: box;
+  -webkit-line-clamp: 12;
   -webkit-box-orient: vertical;
+  box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 250px;
+  max-height: 290px;
 }
 
 /* Responsive adjustments for services */
@@ -1910,7 +1906,13 @@ footer {
   }
   
   .service-content p {
+    display: -webkit-box;
+    display: box;
     -webkit-line-clamp: 12;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     max-height: 290px;
   }
 }
