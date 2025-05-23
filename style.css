@@ -143,7 +143,13 @@ img.loaded {
 }
 
 .hero-overlay {
-  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+  z-index: 3;
 }
 
 /* Performans iyileştirmeleri */
@@ -354,9 +360,12 @@ button {
 }
 
 .nav-logo {
+  font-size: 2rem;
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
+  font-family: var(--font-family-heading);
   color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  display: block;
 }
 
 .nav-menu {
@@ -409,21 +418,75 @@ button {
   min-height: 600px;
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   overflow: hidden;
   background-color: var(--light-color);
-  padding-top: 80px;
-  margin-bottom: 20px;
 }
 
-.hero-background {
+/* Hero Background Container - Progressive Loading */
+.hero-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--z-back);
+}
+
+/* Placeholder görsel (hızlı yüklenen SVG gradient) */
+.hero-placeholder {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: var(--z-back);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Ana hero görseli */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.hero-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
+}
+
+/* Görsel yüklendiğinde */
+.hero-main-image.loaded {
+  opacity: 0.85;
+}
+
+/* Placeholder'ı gizle (ana görsel yüklendiğinde) */
+.hero-main-image.loaded ~ .hero-placeholder,
+.hero-background-container:has(.hero-main-image.loaded) .hero-placeholder {
+  opacity: 0;
+}
+
+/* Critical rendering path için */
+.hero-background-container::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 .hero-overlay {
@@ -438,10 +501,10 @@ button {
 
 .hero-content {
   position: relative;
-  z-index: var(--z-normal);
-  max-width: 800px;
-  margin: 0 auto;
-  padding: var(--spacing-lg);
+  z-index: 4;
+  text-align: center;
+  padding-top: 80px;
+  animation: fadeInUp 1s ease-out;
 }
 
 #hero h1 {
@@ -1151,8 +1214,12 @@ footer {
 }
 
 .footer-logo {
-  max-width: 150px;
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-heading);
+  color: var(--primary-color);
   margin-bottom: var(--spacing-md);
+  display: block;
 }
 
 .footer-info {

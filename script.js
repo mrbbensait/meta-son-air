@@ -59,12 +59,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Hero bölümü görselinin yüklenmesini takip et ve hata durumunda alternatif göster
-  const heroBackground = document.querySelector('.hero-background');
+  const heroBackground = document.querySelector('.hero-main-image');
+  const heroPlaceholder = document.querySelector('.hero-placeholder');
+  
   if (heroBackground) {
+    // Görsel yüklendiğinde
+    heroBackground.addEventListener('load', () => {
+      console.log('Hero görseli başarıyla yüklendi');
+      heroBackground.classList.add('loaded');
+      
+      // Placeholder'ı kaldırmak için delay ekle
+      setTimeout(() => {
+        if (heroPlaceholder) {
+          heroPlaceholder.style.display = 'none';
+        }
+      }, 500);
+    });
+    
+    // Hata durumunda alternatif görsel göster
     heroBackground.addEventListener('error', () => {
       console.log('Hero görseli yüklenemedi, alternatif görsel gösteriliyor');
-      heroBackground.src = 'https://images.unsplash.com/photo-1556227834-09f1de5c1d46?q=80&w=2070'; // Alternatif görsel
+      // Yerel görsel varsa onu kullan, yoksa gradient arka plan kalsın
+      heroBackground.style.display = 'none';
+      if (heroPlaceholder) {
+        heroPlaceholder.style.opacity = '1';
+      }
     });
+    
+    // Critical resource hint ekle
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'image';
+    preloadLink.href = 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1200&fm=webp';
+    preloadLink.type = 'image/webp';
+    document.head.appendChild(preloadLink);
   }
 
   // Sayaç animasyonu fonksiyonu
