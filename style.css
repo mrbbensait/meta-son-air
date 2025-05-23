@@ -1840,6 +1840,7 @@ footer {
   margin-bottom: 0;
   display: -webkit-box;
   -webkit-line-clamp: 10;
+  line-clamp: 10;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1855,6 +1856,7 @@ footer {
   
   .service-content p {
     -webkit-line-clamp: 12;
+    line-clamp: 12;
     max-height: 290px;
   }
 }
@@ -1870,6 +1872,7 @@ footer {
   
   .service-content p {
     -webkit-line-clamp: 10;
+    line-clamp: 10;
     max-height: 250px;
   }
 }
@@ -1877,6 +1880,7 @@ footer {
 @media (max-width: 768px) {
   .service-content p {
     -webkit-line-clamp: 12;
+    line-clamp: 12;
     max-height: 290px;
   }
 }
@@ -1892,6 +1896,7 @@ footer {
   
   .service-content p {
     -webkit-line-clamp: 14;
+    line-clamp: 14;
     max-height: 350px;
   }
 } 
