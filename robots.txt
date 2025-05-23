@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://metapharma.com.tr/sitemap.xml
+
+# Yasaklanmış alanlar
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.log$
+Disallow: /temp/
+
+# Crawl-delay
+Crawl-delay: 1 
